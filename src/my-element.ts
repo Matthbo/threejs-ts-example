@@ -1,42 +1,40 @@
-import { LitElement, html, customElement } from 'lit-element';
-import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
+
+import { LitElement, html, customElement, css, internalProperty } from 'lit-element';
+import "./creating-a-scene";
+import "./drawing-lines";
+import "./load-model";
 
 @customElement('my-element')
 export class MyElement extends LitElement {
-    private scene: Scene;
-    private camera: PerspectiveCamera;
-    private renderer: WebGLRenderer;
-    private cube: Mesh;
+    @internalProperty()
+    private contentWidth: number;
 
     constructor(){
         super();
 
-        this.scene = new Scene();
-        this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.renderer = new WebGLRenderer();
-
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-        const geometry = new BoxGeometry();
-        const material = new MeshBasicMaterial({ color: 0xff0000 });
-        this.cube = new Mesh(geometry, material);
-        this.scene.add(this.cube);
-
-        this.camera.position.z = 5;
-
-        this.animLoop();
+        this.contentWidth = window.innerWidth / 4 * 3;
+        
+        window.addEventListener("resize", () => {
+            this.contentWidth = window.innerWidth / 4 * 3;
+        });
     }
 
-    animLoop(){
-        requestAnimationFrame(this.animLoop.bind(this));
-
-        this.cube.rotation.x += 0.01;
-        this.cube.rotation.y += 0.01;
-
-        this.renderer.render(this.scene, this.camera);
+    static get styles(){
+        return css`
+            .example {
+                display: block;
+                width: 75vw;
+                margin: 0 auto 32px;
+            }
+        `;
     }
 
     render() {
-        return html`${this.renderer.domElement}`;
+        return html`
+            <h1>Examples</h1>
+            <creating-a-scene .width="${this.contentWidth}" class="example"></creating-a-scene>
+            <drawing-lines .width="${this.contentWidth}" class="example"></drawing-lines>
+            <load-model .width="${this.contentWidth}" class="example"></load-model>
+        `;
     }
 }
