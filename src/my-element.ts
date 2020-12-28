@@ -1,4 +1,5 @@
 
+import "./ups-system";
 import { LitElement, html, customElement, css, internalProperty } from 'lit-element';
 import "./creating-a-scene";
 import "./drawing-lines";
@@ -35,6 +36,7 @@ export class MyElement extends LitElement {
             <creating-a-scene .width="${this.contentWidth}" class="example"></creating-a-scene>
             <drawing-lines .width="${this.contentWidth}" class="example"></drawing-lines>
             <load-model .width="${this.contentWidth}" class="example"></load-model>
+            <ups-system .width="${this.contentWidth}" class="example"></ups-system>
         `;
     }
 }
