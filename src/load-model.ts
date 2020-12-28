@@ -62,7 +62,6 @@ export class ExampleThree extends LitElement {
             else if(this.colour < 0xFFFF) this.colour += 0x100;
             else this.colour += 0x10000;
             this.directionalLight.color.set(this.colour);
-            console.log(this.directionalLight.color.getHexString())
         }
         this.renderer.render(this.scene, this.camera);
     }
