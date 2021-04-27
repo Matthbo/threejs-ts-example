@@ -24,6 +24,6 @@
   "dependencies": {
     "@material/mwc-slider": "^0.20.0",
     "lit-element": "^2.4.0",
-    "three": "^0.124.0"
+    "three": "^0.125.0"
   }
 }
